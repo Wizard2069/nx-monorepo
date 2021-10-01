@@ -1,6 +1,325 @@
 {
   "version": 2,
   "projects": {
+    "nx-flutter-example": {
+      "root": "apps/nx-flutter-example",
+      "sourceRoot": "apps/nx-flutter-example/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/nx-flutter-example/*",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/nx-flutter-example"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/nx-flutter-example"
+          }
+        }
+      }
+    },
+    "nx-ionic-react-example": {
+      "root": "apps/nx-ionic-react-example",
+      "sourceRoot": "apps/nx-ionic-react-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/nx-ionic-react-example",
+            "index": "apps/nx-ionic-react-example/src/index.html",
+            "main": "apps/nx-ionic-react-example/src/main.tsx",
+            "polyfills": "apps/nx-ionic-react-example/src/polyfills.ts",
+            "tsConfig": "apps/nx-ionic-react-example/tsconfig.app.json",
+            "assets": [
+              "apps/nx-ionic-react-example/src/assets",
+              "apps/nx-ionic-react-example/src/manifest.json"
+            ],
+            "styles": [
+              "apps/nx-ionic-react-example/src/styles.css"
+            ],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-ionic-react-example/src/environments/environment.ts",
+                  "with": "apps/nx-ionic-react-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "nx-ionic-react-example:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "nx-ionic-react-example:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/nx-ionic-react-example/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/nx-ionic-react-example"
+          ],
+          "options": {
+            "jestConfig": "apps/nx-ionic-react-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "cap": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "--help"
+          }
+        },
+        "add": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "add",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "add ios"
+            },
+            "android": {
+              "cmd": "add android"
+            }
+          }
+        },
+        "copy": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "copy",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "copy ios"
+            },
+            "android": {
+              "cmd": "copy android"
+            }
+          }
+        },
+        "open": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "open",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "open ios"
+            },
+            "android": {
+              "cmd": "open android"
+            }
+          }
+        },
+        "sync": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "sync",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "sync ios"
+            },
+            "android": {
+              "cmd": "sync android"
+            }
+          }
+        },
+        "update": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "update",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "update ios"
+            },
+            "android": {
+              "cmd": "update android"
+            }
+          }
+        }
+      }
+    },
+    "nx-ionic-react-example-e2e": {
+      "root": "apps/nx-ionic-react-example-e2e",
+      "sourceRoot": "apps/nx-ionic-react-example-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nx-ionic-react-example-e2e/cypress.json",
+            "tsConfig": "apps/nx-ionic-react-example-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nx-ionic-react-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nx-ionic-react-example:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/nx-ionic-react-example-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
     "nx-react-example": {
       "root": "apps/nx-react-example",
       "sourceRoot": "apps/nx-react-example/src",
@@ -8,7 +327,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/nx-react-example",
             "index": "apps/nx-react-example/src/index.html",
@@ -17,9 +338,12 @@
             "tsConfig": "apps/nx-react-example/tsconfig.app.json",
             "assets": [
               "apps/nx-react-example/src/favicon.ico",
-              "apps/nx-react-example/src/assets"
+              "apps/nx-react-example/src/assets",
+              "apps/nx-react-example/src/mockServiceWorker.js"
             ],
-            "styles": ["apps/nx-react-example/src/styles.scss"],
+            "styles": [
+              "apps/nx-react-example/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -64,14 +388,68 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/nx-react-example/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/nx-react-example/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/nx-react-example"],
+          "outputs": [
+            "coverage/apps/nx-react-example"
+          ],
           "options": {
             "jestConfig": "apps/nx-react-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nx-react-example-data-access-pokemon": {
+      "root": "libs/nx-react-example/data-access-pokemon",
+      "sourceRoot": "libs/nx-react-example/data-access-pokemon/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/nx-react-example/data-access-pokemon/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/nx-react-example/data-access-pokemon"
+          ],
+          "options": {
+            "jestConfig": "libs/nx-react-example/data-access-pokemon/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nx-react-example-data-access-post": {
+      "root": "libs/nx-react-example/data-access-post",
+      "sourceRoot": "libs/nx-react-example/data-access-post/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/nx-react-example/data-access-post/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/nx-react-example/data-access-post"
+          ],
+          "options": {
+            "jestConfig": "libs/nx-react-example/data-access-post/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -98,7 +476,794 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/nx-react-example-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/nx-react-example-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "nx-react-example-feature-counter": {
+      "root": "libs/nx-react-example/feature-counter",
+      "sourceRoot": "libs/nx-react-example/feature-counter/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/nx-react-example/feature-counter/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/nx-react-example/feature-counter"
+          ],
+          "options": {
+            "jestConfig": "libs/nx-react-example/feature-counter/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nx-react-example-mocks": {
+      "root": "libs/nx-react-example/mocks",
+      "sourceRoot": "libs/nx-react-example/mocks/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/nx-react-example/mocks/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/nx-react-example/mocks"
+          ],
+          "options": {
+            "jestConfig": "libs/nx-react-example/mocks/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-react-ui-button": {
+      "root": "libs/shared/react-ui/button",
+      "sourceRoot": "libs/shared/react-ui/button/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/react-ui/button/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/react-ui/button"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/react-ui/button/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-react-ui-pagination": {
+      "root": "libs/shared/react-ui/pagination",
+      "sourceRoot": "libs/shared/react-ui/pagination/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/react-ui/pagination/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/react-ui/pagination"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/react-ui/pagination/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "flutter-layouts-example": {
+      "root": "apps/flutter-layouts-example",
+      "sourceRoot": "apps/flutter-layouts-example/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/flutter-layouts-example/*",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/flutter-layouts-example"
+          }
+        }
+      }
+    },
+    "flutter-animation-example": {
+      "root": "apps/flutter-animation-example",
+      "sourceRoot": "apps/flutter-animation-example/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/flutter-animation-example/*",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/flutter-animation-example"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/flutter-animation-example"
+          }
+        }
+      }
+    },
+    "flutter-provider-example": {
+      "root": "apps/flutter-provider-example",
+      "sourceRoot": "apps/flutter-provider-example/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/flutter-provider-example/*",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/flutter-provider-example"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/flutter-provider-example"
+          }
+        }
+      }
+    },
+    "flutter-getstream-demo": {
+      "root": "apps/flutter-getstream-demo",
+      "sourceRoot": "apps/flutter-getstream-demo/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/flutter-getstream-demo/*",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/flutter-getstream-demo"
+          }
+        }
+      }
+    },
+    "flutter-encrypted-chat-demo": {
+      "root": "apps/flutter-encrypted-chat-demo",
+      "sourceRoot": "apps/flutter-encrypted-chat-demo/src",
+      "projectType": "application",
+      "targets": {
+        "analyze": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "clean": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter clean",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "format": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter format apps/flutter-encrypted-chat-demo/*",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter test",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "assemble": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter assemble",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "attach": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter attach",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "drive": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter drive",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "genL10n": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter gen-l10n",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "install": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter install",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "run": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter run",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildAar": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build aar",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildApk": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build apk",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildAppbundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build appbundle",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildBundle": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build bundle",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildIos": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildIosFramework": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ios-framework",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        },
+        "buildIpa": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter build ipa",
+            "cwd": "apps/flutter-encrypted-chat-demo"
+          }
+        }
+      }
+    },
+    "nx-spring-example": {
+      "root": "apps/nx-spring-example",
+      "sourceRoot": "apps/nx-spring-example/src",
+      "projectType": "application",
+      "targets": {
+        "test": {
+          "executor": "@nxrocks/nx-spring-boot:test",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "clean": {
+          "executor": "@nxrocks/nx-spring-boot:clean",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "run": {
+          "executor": "@nxrocks/nx-spring-boot:run",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "serve": {
+          "executor": "@nxrocks/nx-spring-boot:serve",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "buildJar": {
+          "executor": "@nxrocks/nx-spring-boot:buildJar",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "buildWar": {
+          "executor": "@nxrocks/nx-spring-boot:buildWar",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "buildImage": {
+          "executor": "@nxrocks/nx-spring-boot:buildImage",
+          "options": {
+            "root": "apps/nx-spring-example"
+          }
+        },
+        "buildInfo": {
+          "executor": "@nxrocks/nx-spring-boot:buildInfo",
+          "options": {
+            "root": "apps/nx-spring-example"
           }
         }
       }
@@ -115,11 +1280,13 @@
         "babel": true
       },
       "component": {
-        "style": "scss"
+        "style": "scss",
+        "pascalCaseFiles": true
       },
       "library": {
         "style": "scss",
-        "linter": "eslint"
+        "linter": "eslint",
+        "pascalCaseFiles": true
       }
     }
   },

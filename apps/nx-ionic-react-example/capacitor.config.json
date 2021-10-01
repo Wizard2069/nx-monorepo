@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "nx-ionic-react-example",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../dist/apps/nx-ionic-react-example",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

@@ -12,9 +12,16 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "buildJar"
+        ],
+        "accessToken": "ODdlMzAyMjYtZDdkOC00NWE0LTk4ZmItMjA1MzBlOTViNzgyfHJlYWQtd3JpdGU="
       }
     }
   },
@@ -27,12 +34,66 @@
     ]
   },
   "projects": {
+    "nx-flutter-example": {
+      "tags": []
+    },
+    "nx-ionic-react-example": {
+      "tags": []
+    },
+    "nx-ionic-react-example-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "nx-ionic-react-example"
+      ]
+    },
     "nx-react-example": {
+      "tags": []
+    },
+    "nx-react-example-data-access-pokemon": {
+      "tags": []
+    },
+    "nx-react-example-data-access-post": {
       "tags": []
     },
     "nx-react-example-e2e": {
       "tags": [],
-      "implicitDependencies": ["nx-react-example"]
+      "implicitDependencies": [
+        "nx-react-example"
+      ]
+    },
+    "nx-react-example-feature-counter": {
+      "tags": []
+    },
+    "nx-react-example-mocks": {
+      "tags": []
+    },
+    "shared-react-ui-button": {
+      "tags": []
+    },
+    "shared-react-ui-pagination": {
+      "tags": []
+    },
+    "flutter-layouts-example": {
+      "tags": []
+    },
+    "flutter-animation-example": {
+      "tags": []
+    },
+    "flutter-provider-example": {
+      "tags": []
+    },
+    "flutter-getstream-demo": {
+      "tags": []
+    },
+    "flutter-encrypted-chat-demo": {
+      "tags": []
+    },
+    "nx-spring-example": {
+      "tags": []
     }
-  }
+  },
+  "plugins": [
+    "@nxrocks/nx-flutter",
+    "@nxrocks/nx-spring-boot"
+  ]
 }

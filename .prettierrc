@@ -1,3 +1,15 @@
 {
-  "singleQuote": true
+  "singleQuote": true,
+  "printWidth": 140,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": ["*.java"],
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
 }

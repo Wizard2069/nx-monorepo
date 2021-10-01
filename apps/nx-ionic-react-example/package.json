@@ -1,0 +1,6 @@
+{
+  "name": "nx-ionic-react-example",
+  "devDependencies": {
+    "@capacitor/cli": "^2.4.5"
+  }
+}

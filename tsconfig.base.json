@@ -14,7 +14,27 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@htcompany/nx-react-example-data-access-pokemon": [
+        "libs/nx-react-example/data-access-pokemon/src/index.ts"
+      ],
+      "@htcompany/nx-react-example-data-access-post": [
+        "libs/nx-react-example/data-access-post/src/index.ts"
+      ],
+      "@htcompany/nx-react-example-feature-counter": [
+        "libs/nx-react-example/feature-counter/src/index.ts"
+      ],
+      "@htcompany/nx-react-example-mocks": [
+        "libs/nx-react-example/mocks/src/index.ts"
+      ],
+      "@htcompany/post/api": ["libs/post/api/src/index.ts"],
+      "@htcompany/shared-react-ui-button": [
+        "libs/shared/react-ui/button/src/index.ts"
+      ],
+      "@htcompany/shared-react-ui-pagination": [
+        "libs/shared/react-ui/pagination/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
