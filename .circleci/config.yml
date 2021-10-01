@@ -80,9 +80,8 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run: npm --version
+      - node/install-npm:
+          version: 14.18.0
 
   initialise:
     executor:
