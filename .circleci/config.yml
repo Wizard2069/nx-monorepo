@@ -32,7 +32,7 @@ commands:
       - attach_workspace:
           at: ~/project
 
-  sonar-scan:
+  sonar_scan:
     description: 'Detect bugs and vulnerabilities'
     parameters:
       sonar_token_variable_name:
@@ -75,6 +75,15 @@ commands:
           paths: /tmp/cache/scanner
 
 jobs:
+  install-npm:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run: npm --version
+
   initialise:
     executor:
       name: node/default
@@ -101,11 +110,12 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
     steps:
-      - sonar-scan
+      - sonar_scan
 
 workflows:
   build-and-test:
     jobs:
+      - install-npm
       - initialise
       - test:
           requires:
