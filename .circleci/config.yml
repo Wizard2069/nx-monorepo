@@ -5,17 +5,69 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   node: circleci/node@4.7
+  sonarcloud: sonarsource/sonarcloud@1.0.1
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+commands:
+  npm_install:
+    description: 'Install & Cache Dependencies'
+    steps:
+      - run: npm install
+      - save_cache:
+          key: ht-company-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.cache
+            - node_modules
+
+  restore_npm_cache:
+    description: 'Restore Cached Dependencies'
+    steps:
+      - restore_cache:
+          keys:
+            - htcompany-{{ checksum "package-lock.json" }}
+            - htcompany- # used if checksum fails
+
+  setup:
+    description: 'Setup Executor'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+
+jobs:
+  initialise:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - restore_npm_cache
+      - npm_install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules
+            - dist
+
+  test:
+    executor:
+      name: node/default
+    steps:
+      - setup
+      - run:
+          name: Build all affected projects
+          command: npx nx affected:test --base=master --head=HEAD
+
+  scan:
+    executor: sonarcloud/default
+    steps:
+      - sonarcloud/scan
+
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  build-and-test:
     jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+      - initialise
+      - test:
+          requires:
+            - initialise
+      - scan:
+          requires:
+            - initialise
