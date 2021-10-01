@@ -10,7 +10,7 @@ commands:
   npm_install:
     description: 'Install & Cache Dependencies'
     steps:
-      - run: npm install
+      - run: npm install -f
       - save_cache:
           key: ht-company-{{ checksum "package-lock.json" }}
           paths:
