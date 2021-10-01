@@ -5,7 +5,6 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   node: circleci/node@4.7
-  sonarcloud: sonarsource/sonarcloud@1.0.1
 
 commands:
   npm_install:
@@ -33,6 +32,48 @@ commands:
       - attach_workspace:
           at: ~/project
 
+  sonar-scan:
+    description: 'Detect bugs and vulnerabilities'
+    parameters:
+      sonar_token_variable_name:
+        description: the name of the environment variable where the SonarCloud API token is stored
+        default: SONAR_TOKEN
+        type: env_var_name
+      cache_version:
+        description: increment this value if the cache is corrupted and you want to start with a clean cache
+        default: 1
+        type: integer
+    steps:
+      - run:
+          name: Create cache directory if it doesn't exist
+          command: mkdir -p /tmp/cache/scanner
+      - restore_cache:
+          keys:
+            - v<<parameters.cache_version>>-sonarcloud-scanner-4.1.0.1829
+      - run:
+          name: SonarCloud
+          command: |
+            set -e
+            VERSION=4.1.0.1829
+            SONAR_TOKEN=$<<parameters.sonar_token_variable_name>>
+            SCANNER_DIRECTORY=/tmp/cache/scanner
+            export SONAR_USER_HOME=$SCANNER_DIRECTORY/.sonar
+            OS="linux"
+            echo $SONAR_USER_HOME
+            if [[ ! -x "$SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner" ]]; then
+              curl -Ol https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$VERSION-$OS.zip
+              unzip -qq -o sonar-scanner-cli-$VERSION-$OS.zip -d $SCANNER_DIRECTORY
+            fi
+
+            chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner
+            chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/jre/bin/java
+            $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner
+          environment:
+            SONARQUBE_SCANNER_PARAMS: '{"sonar.host.url":"https://sonarcloud.io"}'
+      - save_cache:
+          key: v<<parameters.cache_version>>-sonarcloud-scanner-4.1.0.1829
+          paths: /tmp/cache/scanner
+
 jobs:
   initialise:
     executor:
@@ -57,9 +98,10 @@ jobs:
           command: npx nx affected:test --base=master --head=HEAD
 
   scan:
-    executor: sonarcloud/default
+    docker:
+      - image: buildpack-deps:trusty
     steps:
-      - sonarcloud/scan
+      - sonar-scan
 
 workflows:
   build-and-test:
