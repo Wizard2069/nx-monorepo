@@ -75,14 +75,6 @@ commands:
           paths: /tmp/cache/scanner
 
 jobs:
-  install-npm:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - checkout
-      - node/install-npm:
-          version: 14.18.0
-
   initialise:
     executor:
       name: node/default
@@ -114,7 +106,6 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - install-npm
       - initialise
       - test:
           requires:
