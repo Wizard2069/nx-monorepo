@@ -55,6 +55,7 @@ jobs:
       - run:
           name: Build all affected projects
           command: npx nx affected:test --base=master --head=HEAD
+    parallelism: 4
 
   scan:
     docker:
@@ -69,7 +70,6 @@ workflows:
       - test:
           requires:
             - initialise
-          parallelism: 4
       - scan:
           requires:
             - initialise
