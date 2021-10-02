@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Build all affected projects
           command: npx nx affected:test --base=master --head=HEAD
-    parallelism: 4
+    parallelism: 2
 
   scan:
     docker:
@@ -72,5 +72,6 @@ workflows:
           requires:
             - initialise
       - scan:
+          context: SonarCloud
           requires:
             - initialise
