@@ -70,7 +70,10 @@ jobs:
       - checkout
       - run:
           name: Build Spring project
-          command: npx nx buildJar nx-spring-example
+          command: |
+            ls
+            chmod +x ./apps/nx-spring-example/gradlew
+            ./apps/nx-spring-example/gradlew build
       - sonarcloud/scan
 
 workflows:
