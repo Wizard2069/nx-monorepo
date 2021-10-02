@@ -44,6 +44,18 @@ jobs:
             - node_modules
             - dist
 
+  build-spring:
+    executor:
+      name: 'circleci/openjdk:11-jdk'
+    steps:
+      - checkout
+      - run:
+          name: Build Spring project
+          command: |
+            cd ./apps/nx-spring-example
+            chmod +x ./gradlew
+            ./gradlew build
+
   build:
     executor:
       name: node/default
@@ -65,29 +77,29 @@ jobs:
 
   scan:
     docker:
-      - image: 'circleci/openjdk:11-jdk'
+      - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run:
-          name: Build Spring project
-          command: |
-            ls
-            chmod +x ./apps/nx-spring-example/gradlew
-            ./apps/nx-spring-example/gradlew build
       - sonarcloud/scan
 
 workflows:
   build-and-test:
     jobs:
       - initialise
+      - build-spring:
+          requires:
+            - initialise
       - build:
           requires:
             - initialise
       - test:
           requires:
             - initialise
+            - build-spring
             - build
       - scan:
           context: SonarCloud
           requires:
             - initialise
+            - build-spring
+            - build
