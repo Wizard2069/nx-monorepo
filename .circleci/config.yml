@@ -55,6 +55,10 @@ jobs:
             cd ./apps/nx-spring-example
             chmod +x ./gradlew
             ./gradlew build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./apps/nx-spring-example/build
 
   build:
     executor:
@@ -79,7 +83,7 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
     steps:
-      - checkout
+      - setup
       - sonarcloud/scan
 
 workflows:
