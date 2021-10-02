@@ -45,8 +45,8 @@ jobs:
             - dist
 
   build-spring:
-    executor:
-      name: 'circleci/openjdk:11-jdk'
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
     steps:
       - checkout
       - run:
