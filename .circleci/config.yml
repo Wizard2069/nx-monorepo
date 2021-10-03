@@ -44,22 +44,6 @@ jobs:
             - node_modules
             - dist
 
-  build-spring:
-    docker:
-      - image: 'circleci/openjdk:11-jdk'
-    steps:
-      - checkout
-      - run:
-          name: Build Spring project
-          command: |
-            cd ./apps/nx-spring-example
-            chmod +x ./gradlew
-            ./gradlew build
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - ./apps/nx-spring-example/build
-
   build:
     executor:
       name: node/default
@@ -81,10 +65,15 @@ jobs:
 
   scan:
     docker:
-      - image: buildpack-deps:trusty
+      - image: 'circleci/openjdk:11-jdk'
     steps:
       - setup
       - sonarcloud/scan
+      - run:
+          name: Analyze Spring on SonarCloud
+          command: |
+            cd ./apps/nx-spring-example
+            gradle build sonarqube
 
 workflows:
   build-and-test:
@@ -99,11 +88,7 @@ workflows:
       - test:
           requires:
             - initialise
-            - build-spring
-            - build
       - scan:
           context: SonarCloud
           requires:
             - initialise
-            - build-spring
-            - build
