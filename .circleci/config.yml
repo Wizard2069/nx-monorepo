@@ -54,10 +54,11 @@ jobs:
           command: |
             chmod +x ./apps/nx-spring-example/gradlew
             npx nx affected:build --base=master --head=HEAD
+            npx nx affected:buildJar --base=master --head=HEAD
 
   test:
-    executor:
-      name: node/default
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
     steps:
       - setup
       - run:
