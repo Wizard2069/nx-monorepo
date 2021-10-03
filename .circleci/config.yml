@@ -73,7 +73,8 @@ jobs:
           name: Analyze Spring on SonarCloud
           command: |
             cd ./apps/nx-spring-example
-            gradle build sonarqube
+            chmod +x ./gradlew
+            ./gradlew build sonarqube
 
 workflows:
   build-and-test:
