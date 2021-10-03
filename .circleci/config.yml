@@ -79,9 +79,6 @@ workflows:
   build-and-test:
     jobs:
       - initialise
-      - build-spring:
-          requires:
-            - initialise
       - build:
           requires:
             - initialise
