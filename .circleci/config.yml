@@ -81,7 +81,7 @@ jobs:
           command: |
             cd ./apps/nx-spring-example
             chmod +x ./gradlew
-            ./gradle clean build jacocoTestReport
+            ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
 
 workflows:
