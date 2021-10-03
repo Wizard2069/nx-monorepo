@@ -1,0 +1,115 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+  sonarcloud: sonarsource/sonarcloud@1.0.2
+  snyk: snyk/snyk@1.1.1
+
+commands:
+  npm_install:
+    description: 'Install & Cache Dependencies'
+    steps:
+      - run: npm install -f
+      - snyk/scan:
+          fail-on-issues: false
+          severity-threshold: high
+      - save_cache:
+          key: ht-company-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.cache
+            - node_modules
+
+  restore_npm_cache:
+    description: 'Restore Cached Dependencies'
+    steps:
+      - restore_cache:
+          keys:
+            - htcompany-{{ checksum "package-lock.json" }}
+            - htcompany- # used if checksum fails
+
+  setup:
+    description: 'Setup Executor'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+
+jobs:
+  initialise:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - restore_npm_cache
+      - npm_install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules
+            - dist
+
+  build:
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
+    steps:
+      - node/install:
+          install-npm: true
+      - setup
+      - run:
+          name: Build Spring project
+          command: |
+            chmod +x ./apps/nx-spring-example/gradlew
+            npx nx buildJar nx-spring-example
+      - snyk/scan:
+          fail-on-issues: false
+          severity-threshold: high
+      - run:
+          name: Build all affected projects
+          command: npx nx affected:build --base=master --head=HEAD
+
+  test:
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
+    steps:
+      - node/install:
+          install-npm: true
+      - setup
+      - run:
+          name: Build all affected projects
+          command: |
+            chmod +x ./apps/nx-spring-example/gradlew
+            npx nx affected:test --base=master --head=HEAD
+    parallelism: 2
+
+  scan:
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
+    steps:
+      - node/install:
+          install-npm: true
+      - setup
+      - sonarcloud/scan
+      - run:
+          name: Analyze Spring on SonarCloud
+          command: |
+            cd ./apps/nx-spring-example
+            chmod +x ./gradlew
+            ./gradlew clean build jacocoTestReport
+            ./gradlew build sonarqube
+
+workflows:
+  build-and-test:
+    jobs:
+      - initialise:
+          context: Snyk
+      - build:
+          context: Snyk
+          requires:
+            - initialise
+      - test:
+          requires:
+            - initialise
+      - scan:
+          context: SonarCloud
+          requires:
+            - initialise
