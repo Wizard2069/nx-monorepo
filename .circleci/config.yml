@@ -10,9 +10,6 @@ commands:
     description: 'Install & Cache Dependencies'
     steps:
       - run: npm install -f
-      - snyk/scan:
-          fail-on-issues: false
-          severity-threshold: high
       - save_cache:
           key: htcompany-{{ checksum "package-lock.json" }}
           paths:
@@ -33,6 +30,13 @@ commands:
       - checkout
       - attach_workspace:
           at: ~/project
+
+  snyk_scan:
+    description: 'Snyk scan dependencies'
+    steps:
+      - snyk/scan:
+          fail-on-issues: false
+          severity-threshold: high
 
 jobs:
   initialise:
@@ -60,9 +64,6 @@ jobs:
           command: |
             chmod +x ./apps/nx-spring-example/gradlew
             npx nx buildJar nx-spring-example
-      - snyk/scan:
-          fail-on-issues: false
-          severity-threshold: high
       - run:
           name: Build all affected projects
           command: npx nx affected:build --base=master --head=HEAD
@@ -95,7 +96,11 @@ jobs:
             chmod +x ./gradlew
             ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
-            cd ~/project
+      - snyk_scan
+      - run:
+          name: To root
+          command: cd ~/project
+      - snyk_scan
       - sonarcloud/scan
 
 workflows:
