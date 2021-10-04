@@ -106,16 +106,16 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - initialise:
-          context: Snyk
+      - initialise
       - build:
-          context: Snyk
           requires:
             - initialise
       - test:
           requires:
             - initialise
       - scan:
-          context: SonarCloud
+          context:
+            - SonarCloud
+            - Snyk
           requires:
             - initialise
