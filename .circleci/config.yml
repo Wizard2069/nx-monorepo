@@ -88,7 +88,6 @@ jobs:
       - node/install:
           install-npm: true
       - setup
-      - sonarcloud/scan
       - run:
           name: Analyze Spring on SonarCloud
           command: |
@@ -96,6 +95,8 @@ jobs:
             chmod +x ./gradlew
             ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
+            cd ~/project
+      - sonarcloud/scan
 
 workflows:
   build-and-test:
