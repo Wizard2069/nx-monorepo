@@ -82,26 +82,30 @@ jobs:
             npx nx affected:test --base=master --head=HEAD
     parallelism: 2
 
-  scan:
+  scan-node:
     docker:
-      - image: 'circleci/openjdk:11-jdk'
+      - image: circleci/buildpack-deps:trusty
     steps:
-      - node/install:
-          install-npm: true
       - setup
       - snyk_scan
       - sonarcloud/scan
+
+  scan-spring:
+    working_directory: ~/project/apps/nx-spring-example
+    docker:
+      - image: 'circleci/openjdk:11-jdk'
+    steps:
+      - checkout
       - run:
           name: Analyze Spring on SonarCloud
           command: |
-            cd ./apps/nx-spring-example
             chmod +x ./gradlew
             ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
       - snyk/scan:
           fail-on-issues: false
           severity-threshold: high
-          target-file: "./apps/nx-spring-example/build.gradle"
+          target-file: "build.gradle"
 
 workflows:
   build-and-test:
@@ -113,7 +117,13 @@ workflows:
       - test:
           requires:
             - initialise
-      - scan:
+      - scan-node:
+          context:
+            - SonarCloud
+            - Snyk
+          requires:
+            - initialise
+      - scan-spring:
           context:
             - SonarCloud
             - Snyk
