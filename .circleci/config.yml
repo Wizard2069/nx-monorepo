@@ -99,13 +99,13 @@ jobs:
           name: Analyze Spring on SonarCloud
           command: |
             cd ./apps/nx-spring-example
-            chmod +x ./apps/nx-spring-example/gradlew
+            chmod +x ./gradlew
             ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
       - snyk/scan:
           fail-on-issues: false
           severity-threshold: high
-          target-file: 'build.gradle'
+          target-file: './apps/nx-spring-example/build.gradle'
           project: 'htcompany/nx-spring-example'
 
 workflows:
