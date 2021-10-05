@@ -89,6 +89,8 @@ jobs:
       - node/install:
           install-npm: true
       - setup
+      - snyk_scan
+      - sonarcloud/scan
       - run:
           name: Analyze Spring on SonarCloud
           command: |
@@ -96,12 +98,10 @@ jobs:
             chmod +x ./gradlew
             ./gradlew clean build jacocoTestReport
             ./gradlew build sonarqube
-      - snyk_scan
-      - run:
-          name: To root
-          command: cd ~/project
-      - snyk_scan
-      - sonarcloud/scan
+      - snyk/scan:
+          fail-on-issues: false
+          severity-threshold: high
+          target-file: "build.gradle"
 
 workflows:
   build-and-test:
