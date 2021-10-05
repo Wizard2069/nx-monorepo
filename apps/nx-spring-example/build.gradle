@@ -12,6 +12,7 @@ sonarqube {
         property "sonar.projectKey", "Wizard2069_nx-monorepo"
         property "sonar.organization", "wizard2069"
         property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.projectName", "htcompany/nx-spring-example"
     }
 }
 

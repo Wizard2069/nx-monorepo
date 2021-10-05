@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Build Spring project
           command: |
-            chmod +x /apps/nx-spring-example/gradlew
+            chmod +x ./apps/nx-spring-example/gradlew
             npx nx buildJar nx-spring-example
       - run:
           name: Build all affected projects
@@ -78,7 +78,7 @@ jobs:
       - run:
           name: Build all affected projects
           command: |
-            chmod +x /apps/nx-spring-example/gradlew
+            chmod +x ./apps/nx-spring-example/gradlew
             npx nx affected:test --base=master --head=HEAD
     parallelism: 2
 
@@ -91,7 +91,6 @@ jobs:
       - sonarcloud/scan
 
   scan-spring:
-    working_directory: ~/project/apps/nx-spring-example
     docker:
       - image: 'circleci/openjdk:11-jdk'
     steps:
@@ -99,9 +98,10 @@ jobs:
       - run:
           name: Analyze Spring on SonarCloud
           command: |
-            chmod +x gradlew
-            gradle clean build jacocoTestReport
-            gradle build sonarqube
+            cd ./apps/nx-spring-example
+            chmod +x ./apps/nx-spring-example/gradlew
+            ./gradlew clean build jacocoTestReport
+            ./gradlew build sonarqube
       - snyk/scan:
           fail-on-issues: false
           severity-threshold: high
