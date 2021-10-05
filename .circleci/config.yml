@@ -101,7 +101,7 @@ jobs:
       - snyk/scan:
           fail-on-issues: false
           severity-threshold: high
-          target-file: "build.gradle"
+          target-file: "./apps/nx-spring-example/build.gradle"
 
 workflows:
   build-and-test:
