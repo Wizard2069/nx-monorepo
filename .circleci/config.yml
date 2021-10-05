@@ -84,7 +84,7 @@ jobs:
 
   scan-node:
     docker:
-      - image: circleci/buildpack-deps:trusty
+      - image: 'circleci/buildpack-deps:trusty'
     steps:
       - setup
       - snyk_scan
