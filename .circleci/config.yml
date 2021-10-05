@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Build Spring project
           command: |
-            chmod +x ./apps/nx-spring-example/gradlew
+            chmod +x /apps/nx-spring-example/gradlew
             npx nx buildJar nx-spring-example
       - run:
           name: Build all affected projects
@@ -78,7 +78,7 @@ jobs:
       - run:
           name: Build all affected projects
           command: |
-            chmod +x ./apps/nx-spring-example/gradlew
+            chmod +x /apps/nx-spring-example/gradlew
             npx nx affected:test --base=master --head=HEAD
     parallelism: 2
 
@@ -99,13 +99,14 @@ jobs:
       - run:
           name: Analyze Spring on SonarCloud
           command: |
-            chmod +x ./gradlew
-            ./gradlew clean build jacocoTestReport
-            ./gradlew build sonarqube
+            chmod +x gradlew
+            gradle clean build jacocoTestReport
+            gradle build sonarqube
       - snyk/scan:
           fail-on-issues: false
           severity-threshold: high
-          target-file: "build.gradle"
+          target-file: 'build.gradle'
+          project: 'htcompany/nx-spring-example'
 
 workflows:
   build-and-test:
